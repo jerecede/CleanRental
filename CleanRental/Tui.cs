@@ -53,7 +53,7 @@ namespace CleanRental
                         break;
 
                     case "4":
-                        DisplayStoreNumberByCountry();
+                        DisplayStoreNumberEachCountry();
                         break;
 
                     case "5":
@@ -101,22 +101,34 @@ namespace CleanRental
             }
         }
 
-        private void DisplayMoviesByActor()
+        private void DisplayMovies()
         {
-            throw new NotImplementedException();
+            var movies = Logic.GetAllMovies();
+            foreach (var movie in movies)
+            {
+                Console.WriteLine($"{movie.FilmId} - {movie.Title}");
+            }
         }
 
-        private void DisplayMoviesByGenre()
+        private void DisplayComedyMovies()
         {
-            throw new NotImplementedException();
+            var movies = Logic.GetComedyMovies();
+            foreach (var movie in movies)
+            {
+                Console.WriteLine($"{movie.FilmId} - {movie.Title}");
+            }
         }
 
-        private void DisplayMoviesOrderByRentalIncome()
+        private void DisplayComedyActors()
         {
-            throw new NotImplementedException();
+            var actors = Logic.GetComedyActors();
+            foreach (var actor in actors)
+            {
+                Console.WriteLine($"{actor.ActorId} - {actor.FirstName} {actor.LastName}");
+            }
         }
 
-        private void DisplayActorsOrderByRentalNumber()
+        private void DisplayStoreNumberEachCountry()
         {
             throw new NotImplementedException();
         }
@@ -126,17 +138,43 @@ namespace CleanRental
             throw new NotImplementedException();
         }
 
-        private void DisplayComedyActors()
+        private void DisplayActorsOrderByRentalNumber()
         {
             throw new NotImplementedException();
         }
 
-        private void DisplayCategories()
+        private void DisplayMoviesOrderByRentalIncome()
         {
-            var categs = Logic.GetAllCateg();
-            foreach (var categ in categs)
+            var movies = Logic.GetMoviesOrderByRental();
+            foreach (var movie in movies)
             {
-                Console.WriteLine($"{categ.CategoryId} - {categ.Name}");
+                Console.WriteLine($"{movie.FilmId} - {movie.Title}");
+            }
+        }
+
+        private void DisplayMoviesByGenre()
+        {
+            DisplayCategories();
+            Console.WriteLine("Enter Genre ID to see their movies: ");
+            var choice = Console.ReadLine();
+            var categId = int.TryParse(choice, out var id) ? id : -1;
+            var movies = Logic.GetMoviesByCategId(categId);
+            foreach (var movie in movies)
+            {
+                Console.WriteLine($"{movie.FilmId} - {movie.Title}");
+            }
+        }
+
+        private void DisplayMoviesByActor()
+        {
+            DisplayActors();
+            Console.Write("Enter Actor ID to see their movies: ");
+            var choice = Console.ReadLine();
+            var actorId = int.TryParse(choice, out var id) ? id : -1;
+            var movies = Logic.GetMoviesByActorId(actorId);
+            foreach (var movie in movies)
+            {
+                Console.WriteLine($"{movie.FilmId} - {movie.Title}");
             }
         }
 
@@ -149,22 +187,12 @@ namespace CleanRental
             }
         }
 
-        private void DisplayStoreNumberByCountry()
+        private void DisplayCategories()
         {
-            throw new NotImplementedException();
-        }
-
-        private void DisplayComedyMovies()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void DisplayMovies()
-        {
-            var movies = Logic.GetAllMovies();
-            foreach (var movie in movies)
+            var categs = Logic.GetAllCateg();
+            foreach (var categ in categs)
             {
-                Console.WriteLine($"{movie.FilmId} - {movie.Title}");
+                Console.WriteLine($"{categ.CategoryId} - {categ.Name}");
             }
         }
     }
