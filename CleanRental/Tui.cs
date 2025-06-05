@@ -23,7 +23,7 @@ namespace CleanRental
                 Console.WriteLine("1. Display all the movies");
                 Console.WriteLine("2. Display all comedy movies");
                 Console.WriteLine("3. Display all comedy actors");
-                Console.WriteLine("4. Display store number by country");
+                Console.WriteLine("4. Display store number per country");
                 Console.WriteLine("5. Display movies rental number");
                 Console.WriteLine("6. Display actors ordered by rental number");
                 Console.WriteLine("7. Display movies ordered by rental income");
@@ -101,6 +101,7 @@ namespace CleanRental
             }
         }
 
+        //1
         private void DisplayMovies()
         {
             var movies = Logic.GetAllMovies();
@@ -110,6 +111,7 @@ namespace CleanRental
             }
         }
 
+        //2
         private void DisplayComedyMovies()
         {
             var movies = Logic.GetComedyMovies();
@@ -119,6 +121,7 @@ namespace CleanRental
             }
         }
 
+        //3
         private void DisplayComedyActors()
         {
             var actors = Logic.GetComedyActors();
@@ -128,30 +131,48 @@ namespace CleanRental
             }
         }
 
+        //4
         private void DisplayStoreNumberEachCountry()
         {
-            throw new NotImplementedException();
-        }
-
-        private void DisplayMoviesRentalNumber()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void DisplayActorsOrderByRentalNumber()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void DisplayMoviesOrderByRentalIncome()
-        {
-            var movies = Logic.GetMoviesOrderByRental();
-            foreach (var movie in movies)
+            var storesNumberPerCountry = Logic.GetStoreNumberEachCountry();
+            foreach (var item in storesNumberPerCountry)
             {
-                Console.WriteLine($"{movie.FilmId} - {movie.Title}");
+                Console.WriteLine($"{item.country.Country1} - {item.storeCount}");
             }
         }
 
+        //5
+        private void DisplayMoviesRentalNumber()
+        {
+            var moviesRentalNumber = Logic.GetMoviesRentalNumber();
+            foreach (var item in moviesRentalNumber)
+            {
+                Console.WriteLine($"{item.film.FilmId} - {item.film.Title} - {item.rentalNumber} rentals");
+            }
+        }
+
+        //6
+        private void DisplayActorsOrderByRentalNumber()
+        {
+            var actors = Logic.GetActorsOrderByRentalNumber();
+
+            foreach (var actor in actors)
+            {
+                Console.WriteLine($"{actor.ActorId} - {actor.FirstName} {actor.LastName}");
+            }
+        }
+
+        //7
+        private void DisplayMoviesOrderByRentalIncome()
+        {
+            var movies = Logic.GetMoviesOrderByRentalIncome();
+            foreach (var movie in movies)
+            {
+                Console.WriteLine($"{movie.Item1} - {movie.Item2}");
+            }
+        }
+
+        //8
         private void DisplayMoviesByGenre()
         {
             DisplayCategories();
@@ -165,6 +186,7 @@ namespace CleanRental
             }
         }
 
+        //9
         private void DisplayMoviesByActor()
         {
             DisplayActors();
@@ -178,6 +200,7 @@ namespace CleanRental
             }
         }
 
+        //10
         private void DisplayActors()
         {
             var actors = Logic.GetAllActors();
@@ -187,6 +210,7 @@ namespace CleanRental
             }
         }
 
+        //11
         private void DisplayCategories()
         {
             var categs = Logic.GetAllCateg();
